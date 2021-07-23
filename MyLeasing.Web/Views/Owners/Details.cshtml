@@ -51,7 +51,7 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
-    <a asp-action="Add Property" asp-route-id="@Model.Id" class="btn btn-primary">Add Property</a> |
+    <a asp-action="AddProperty" asp-route-id="@Model.Id" class="btn btn-primary">Add Property</a> |
     <a asp-action="Index" class="btn btn-success">Back to List</a>
 
 </div>
@@ -98,28 +98,28 @@ else
             {
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Neighborhood)
+                    @Html.DisplayFor(modelItem => item.Neighborhood)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Address)
+                    @Html.DisplayFor(modelItem => item.Address)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Price)
+                    @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().SquareMeters)
+                    @Html.DisplayFor(modelItem => item.SquareMeters)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Rooms)
+                    @Html.DisplayFor(modelItem => item.Rooms)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().IsAvailable)
+                    @Html.DisplayFor(modelItem => item.IsAvailable)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().propertyImages.Count)
+                    @Html.DisplayFor(modelItem => item.propertyImages.Count)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().contracts.Count)
+                    @Html.DisplayFor(modelItem => item.contracts.Count)
                 </td>
                 
                 <td>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using MyLeasing.Web.Data.Entities;
 using MyLeasing.Web.Models;
+using System;
 using System.Threading.Tasks;
 using LoginViewModel = MyLeasing.Web.Models.LoginViewModel;
 
@@ -24,8 +25,18 @@ namespace MyLeasing.Web.Helpers
         }
 
         public async Task<IdentityResult> AddUserAsync(User user, string password)
+
         {
-            return await _userManager.CreateAsync(user, password);
+            try
+            {
+                var r = await _userManager.CreateAsync(user, password);
+                return r;
+
+            }
+            catch(Exception e) {
+                return null;
+            }
+          
         }
 
         public async Task AddUserToRoleAsync(User user, string roleName)

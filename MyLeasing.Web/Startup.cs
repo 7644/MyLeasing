@@ -72,9 +72,13 @@ namespace MyLeasing.Web
             //Solo inyecta una vez
             services.AddTransient<SeedDb>();
             //la primera vez que se mande, se crea en memoria y lo manda, pero siempre queda en memoria
-            services.AddSingleton<UserHelper>();
+            //services.AddSingleton<UserHelper>();
             //inyecta cada vez que lo necesita y crea un nuevo objeto
             services.AddScoped<IUserHelper, UserHelper>();
+            services.AddScoped<ICombosHelper, CombosHelper>();
+            services.AddScoped<IConverterHelper, ConverterHelper>();
+
+
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

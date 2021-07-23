@@ -42,28 +42,28 @@
 @foreach (var item in Model) {
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.User.Document)
+                @Html.DisplayFor(modelItem =>item.User.Document)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User.FirstName)
+                @Html.DisplayFor(model => item.User.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User.LastName)
+                @Html.DisplayFor(model => item.User.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User.Email)
+                @Html.DisplayFor(model => item.User.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User.Address)
+                @Html.DisplayFor(model => item.User.Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User.PhoneNumber)
+                @Html.DisplayFor(model => item.User.PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => item.Properties.Count)
+                @Html.DisplayFor(model => item.Properties.Count)
             </th>
             <th>
-                @Html.DisplayNameFor(model => item.Contracts.Count)
+                @Html.DisplayFor(model => item.Contracts.Count)
             </th>
 
             <td>
