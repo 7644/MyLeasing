@@ -16,6 +16,29 @@ namespace MyLeasing.Web.Helpers
             _dataContext = dataContext;
         }
 
+        public IEnumerable<SelectListItem> GetComboLessees()
+        {
+            var list = _dataContext.Lessees.Select(l => new SelectListItem
+
+            {
+                Text = l.User.FullNameWithDocument,
+                Value = $"{l.Id}"
+
+
+            }).OrderBy(pt => pt.Text)
+               .ToList();
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Select  a lesse type...)",
+                Value = "0"
+
+
+
+            });
+
+            return list;
+        }
+
         //selectListItem es una clase que tiene dos campos  texto y valor
         public IEnumerable<SelectListItem> GetcomboPropertyTypes()
         {
