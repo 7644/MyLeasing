@@ -487,6 +487,36 @@ namespace MyLeasing.Web.Controllers
             await _dataContext.SaveChangesAsync();
             return RedirectToAction($"{nameof(DetailsProperty)}/{contract.Property.Id}");
         }
+        public async Task<IActionResult> DeleteProperty(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var property = await _dataContext.Properties
+                .Include(p => p.Owner)
+                .Include(p => p.propertyImages)
+                .Include(p => p.contracts)
+                .FirstOrDefaultAsync(pi => pi.Id == id.Value);
+            if (property == null)
+            {
+                return NotFound();
+            }
+            //
+            if (property.contracts.Count != 0)
+            {
+                ModelState.AddModelError(string.Empty, "The property can't be deleted because it has contracts.");
+                return RedirectToAction($"{nameof(Details)}/{property.Owner.Id}");
+            }
+            // primero se debe borrar las relaciones y por ultimo la tabla padre
+            _dataContext.PropertyImages.RemoveRange(property.propertyImages);
+            _dataContext.Contracts.RemoveRange(property.contracts);
+            _dataContext.Properties.Remove(property);
+            await _dataContext.SaveChangesAsync();
+            return RedirectToAction($"{nameof(Details)}/{property.Owner.Id}");
+        }
+
 
 
 
