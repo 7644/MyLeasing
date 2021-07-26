@@ -147,7 +147,7 @@
                                                     }
                                                 </td>
                                                 <td>
-                                                    <a asp-action="DeleteImage" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                                    <button data-id="@item.Id" class="btn btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Delete</button>
                                                 </td>
                                             </tr>
                                         }
@@ -224,7 +224,8 @@
                                                 <td>
                                                     <a asp-action="EditContract" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
                                                     <a asp-action="DetailsContract" asp-route-id="@item.Id" class="btn btn-info">Details</a>
-                                                    <a asp-action="DeleteContract" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                                    <button data-id="@item.Id" class="btn btn-danger deleteContract" data-toggle="modal" data-target="#deleteDialog">Delete</button>
+
                                                 </td>
                                             </tr>
                                         }
@@ -239,6 +240,64 @@
     </div>
 </div>
 
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
 
-    
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete the record?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="btnYesDelete">Delete</button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        //con esto  $(document).ready(function () se dice que se toma el control del documento
+        $(document).ready(function () {
+          // $('#MyTableImages').DataTable();
+           // $('#MyTableContracts').DataTable();
+            // Delete item
+            var item_to_delete;
+            var action_to_delete;
+            // si se coloca el punto es por que se sta accediendo a la clase de ese elemento
+            $('.deleteImage').click((e) => {
+                //aqui item_to_delete = e.currentTarget.dataset.id se almacena el codigo de lo que se va a borrar
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 1;
+            });
+            $('.deleteContract').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 2;
+            });
+            //se llama por numeral por que este elemento se esta capturando por el id
+            $("#btnYesDelete").click(function () {
+                if (action_to_delete == 1) {
+                    window.location.href = '/Owners/DeleteImage/' + item_to_delete;
+                } else {
+                    window.location.href = '/Owners/DeleteContract/' + item_to_delete;
+                }
+            });
+        });
+    </script>
+}
+
+
+
 
