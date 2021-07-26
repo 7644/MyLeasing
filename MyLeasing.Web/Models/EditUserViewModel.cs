@@ -2,7 +2,7 @@
 
 namespace MyLeasing.Web.Models
 {
-    public class EditUserViewModel
+    public class EditUserViewModel 
     {
         public int Id { get; set; }
 

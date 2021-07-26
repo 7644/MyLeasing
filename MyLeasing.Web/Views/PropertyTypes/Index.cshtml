@@ -19,17 +19,48 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        //con esto  $(document).ready(function () se dice que se toma el control del documento
+        $(document).ready(function () {
+          // $('#MyTableImages').DataTable();
+           // $('#MyTableContracts').DataTable();
+            // Delete item
+            var item_to_delete;
+
+            // si se coloca el punto es por que se sta accediendo a la clase de ese elemento
+            $('.deleteItem').click((e) => {
+                //aqui item_to_delete = e.currentTarget.dataset.id se almacena el codigo de lo que se va a borrar
+                item_to_delete = e.currentTarget.dataset.id;
+            
+            });
+            //se llama por numeral por que este elemento se esta capturando por el id
+            $("#btnYesDelete").click(function () {
+          
+                    window.location.href = '/Propertytypes/Delete/' + item_to_delete;
+               
+            });
+        });
+    </script>
+}
