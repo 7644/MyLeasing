@@ -1,4 +1,4 @@
-﻿using IdentityServer3.Core.ViewModels;
+﻿
 using Microsoft.AspNetCore.Identity;
 using MyLeasing.Web.Data.Entities;
 using MyLeasing.Web.Models;
